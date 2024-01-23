@@ -1,8 +1,8 @@
-# Your Module Name
+# tf-azurerm-module_primitive-user_managed_identity
 
 ## Overview
 
-What does this module do?
+This terraform module creates a User Managed Identity. This identity is assigned to certain Azure resources and helps in authenticating against other Azure resources.
 
 ## Pre-Commit hooks
 [.pre-commit-config.yaml](.pre-commit-config.yaml) file defines certain `pre-commit` hooks that are relevant to terraform, golang and common linting tasks. There are no custom hooks added.
@@ -106,7 +106,7 @@ If `make check` target is successful, developer is good to commit the code to pr
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.80.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.88.0 |
 
 ## Modules
 
@@ -130,5 +130,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_user_assigned_identity"></a> [user\_assigned\_identity](#output\_user\_assigned\_identity) | user assigned identity resource |
+| <a name="output_id"></a> [id](#output\_id) | Id of the User assigned identity resource |
+| <a name="output_client_id"></a> [client\_id](#output\_client\_id) | Client\_id of the User assigned identity resource |
+| <a name="output_principal_id"></a> [principal\_id](#output\_principal\_id) | Principal\_Id of the User assigned identity resource |
+| <a name="output_tenant_id"></a> [tenant\_id](#output\_tenant\_id) | Tenant\_Id of the User assigned identity resource |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
