@@ -10,25 +10,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-resource "random_integer" "priority" {
-  min = 10000
-  max = 50000
+module "resource_names" {
+  source = "git::https://github.com/nexient-llc/tf-module-resource_name.git?ref=1.0.0"
+
+  for_each = var.resource_names_map
+
+  logical_product_family  = var.product_family
+  logical_product_service = var.product_service
+  region                  = join("", split("-", var.region))
+  class_env               = var.environment
+  cloud_resource_type     = each.value.name
+  instance_env            = var.environment_number
+  instance_resource       = var.resource_number
+  maximum_length          = each.value.max_length
 }
 
 module "resource_group" {
   source = "git::https://github.com/nexient-llc/tf-azurerm-module-resource_group.git?ref=0.2.0"
 
-  name       = local.resource_group_name
+  name       = module.resource_names["rg"].minimal_random_suffix
   location   = var.location
   tags       = local.tags
   managed_by = var.managed_by
 }
 
 module "user_assigned_identity" {
-  source                      = "../.."
-  depends_on                  = [module.resource_group]
+  source = "../.."
+
   resource_group_name         = module.resource_group.name
   location                    = var.location
-  user_assigned_identity_name = local.name
+  user_assigned_identity_name = module.resource_names["msi"].minimal_random_suffix
+
+  depends_on = [module.resource_group]
 
 }
