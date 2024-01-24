@@ -48,7 +48,7 @@ variable "resource_number" {
 
 variable "region" {
   description = "AWS Region in which the infra needs to be provisioned"
-  default     = "EastUS"
+  default     = "eastus"
 }
 
 variable "resource_names_map" {
@@ -69,12 +69,6 @@ variable "resource_names_map" {
       max_length = 60
     }
   }
-}
-
-variable "location" {
-  description = "(Required) The Azure Region where the Resource Group exist. Changing this forces a new Resource Group to be created."
-  type        = string
-  default     = "EastUS"
 }
 
 variable "tags" {

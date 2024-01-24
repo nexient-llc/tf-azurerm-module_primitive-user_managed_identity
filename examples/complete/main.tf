@@ -29,7 +29,7 @@ module "resource_group" {
   source = "git::https://github.com/nexient-llc/tf-azurerm-module-resource_group.git?ref=0.2.0"
 
   name       = module.resource_names["rg"].minimal_random_suffix
-  location   = var.location
+  location   = var.region
   tags       = local.tags
   managed_by = var.managed_by
 }
@@ -38,7 +38,7 @@ module "user_assigned_identity" {
   source = "../.."
 
   resource_group_name         = module.resource_group.name
-  location                    = var.location
+  location                    = var.region
   user_assigned_identity_name = module.resource_names["msi"].minimal_random_suffix
 
   depends_on = [module.resource_group]
